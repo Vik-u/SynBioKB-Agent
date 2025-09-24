@@ -1,0 +1,13 @@
+llm:
+  provider: ollama
+  base_url: http://localhost:11434
+  model: gpt-oss:20b
+  temperature: 0.0
+  top_p: 1.0
+  seed: 42
+
+  # For cloud providers (optional)
+  # provider: openai
+  # api_key: sk-...
+  # model: gpt-4o-mini
+

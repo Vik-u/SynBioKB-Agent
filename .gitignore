@@ -1,0 +1,32 @@
+# Python/build
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+
+# OS
+.DS_Store
+
+# Envs
+.venv*/
+
+# Project outputs
+pages/
+work/
+artifacts/
+
+# Secrets/config (do not commit real keys)
+apis.yaml
+llm.yaml
+.env
+*.env
+
+# Nextflow work dir
+nf_out/
+workflows/.nextflow*
+
+# Playwright caches
+**/ms-playwright/
+**/.cache/

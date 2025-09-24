@@ -1,0 +1,7 @@
+serpapi:
+  api_key: "30a62XXXXXXXXXXXXXXX7-LOL"
+  engine: "google"
+
+brave:
+  api_key: "YOUR_BRAVE_API_KEY"
+

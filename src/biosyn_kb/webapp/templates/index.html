@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Biosyn-KB Web</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; }
+    form { max-width: 720px; }
+    textarea, input, select { width: 100%; margin: 0.25rem 0 1rem 0; padding: 0.4rem; }
+    label { font-weight: 600; }
+    .row { display: flex; gap: 1rem; }
+    .col { flex: 1; }
+  </style>
+  </head>
+<body>
+  <h1>Biosyn-KB Web</h1>
+  <form action="/run" method="post">
+    <label>Query</label>
+    <input type="text" name="query" placeholder="e.g., biosynthesis of artemisinin" required>
+
+    <div class="row">
+      <div class="col">
+        <label>Search Provider</label>
+        <select name="provider">
+          <option value="serpapi">SerpAPI</option>
+          <option value="brave">Brave</option>
+        </select>
+      </div>
+      <div class="col">
+        <label>Max Results</label>
+        <input type="number" name="max_results" value="5" min="1" max="20">
+      </div>
+    </div>
+
+    <label>Exclude Domains (one per line)</label>
+    <textarea name="exclude_domains" rows="3" placeholder="wikipedia.org"></textarea>
+
+    <label>LLM Model</label>
+    <select name="model">
+      {% for m in models %}
+      <option value="{{ m }}">{{ m }}</option>
+      {% endfor %}
+    </select>
+
+    <button type="submit">Run Agent Pipeline</button>
+  </form>
+
+  <p><a href="/status">View Job Status</a></p>
+</body>
+</html>
+

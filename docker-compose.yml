@@ -1,0 +1,33 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    restart: unless-stopped
+
+  biosyn-kb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: biosyn-kb:latest
+    container_name: biosyn-kb
+    environment:
+      - LLM_PROVIDER=ollama
+      - LLM_BASE_URL=http://ollama:11434
+      - UNPAYWALL_EMAIL=${UNPAYWALL_EMAIL}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./apis.yaml:/app/apis.yaml:ro
+      - ./pages:/app/pages
+      - ./work:/app/work
+      - ./artifacts:/app/artifacts
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+volumes:
+  ollama_models:

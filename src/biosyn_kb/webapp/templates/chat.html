@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Biosyn-KB Chat</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; }
+    .chat { max-width: 840px; margin-bottom: 1rem; }
+    .msg { padding: .6rem .8rem; border-radius: 8px; margin: .4rem 0; }
+    .user { background: #e3f2fd; }
+    .assistant { background: #f1f8e9; }
+    .meta { color: #666; font-size: .85rem; margin-top: .5rem; }
+    textarea, input, select { width: 100%; padding: .5rem; margin: .25rem 0 .75rem 0; }
+    label { font-weight: 600; }
+    .row { display: flex; gap: 1rem; }
+    .col { flex: 1; }
+    .reply { border: 1px solid #ddd; padding: .6rem; border-radius: 6px; background: #fff; }
+  </style>
+</head>
+<body>
+  <h1>Biosyn-KB Chat</h1>
+  <div class="chat">
+    {% for m in messages %}
+      <div class="msg {{ m['role'] }}">{{ m['text'] | replace('\n','<br>') | safe }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="reply">
+    <h3>Latest Structured Evidence</h3>
+    {{ reply_html | safe }}
+  </div>
+
+  <form method="post" action="/chat">
+    <input type="hidden" name="session" value="{{ session }}">
+    <label>Message</label>
+    <input type="text" name="message" placeholder="e.g., biosynthesis of artemisinin" required>
+
+    <div class="row">
+      <div class="col">
+        <label>Search Provider</label>
+        <select name="provider">
+          <option value="serpapi">SerpAPI</option>
+          <option value="brave">Brave</option>
+        </select>
+      </div>
+      <div class="col">
+        <label>Max Results</label>
+        <input type="number" name="max_results" value="3" min="1" max="20">
+      </div>
+    </div>
+
+    <label>Exclude Domains (one per line)</label>
+    <textarea name="exclude_domains" rows="2">wikipedia.org</textarea>
+
+    <label>LLM Model</label>
+    <select name="model">
+      {% for m in models %}
+      <option value="{{ m }}">{{ m }}</option>
+      {% endfor %}
+    </select>
+
+    <button type="submit">Send</button>
+  </form>
+
+  <div class="meta">
+    Session: {{ session }} · <a href="/status" target="_blank">Job Status</a>
+  </div>
+
+</body>
+</html>
+
