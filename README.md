@@ -1,5 +1,9 @@
 # Biosyn‑KB — Evidence‑Grounded Biosynthesis Knowledge Base
 
+![Workflow Overview](Image_wf.png)
+
+<sub>High‑level workflow: Strategist → Search/OA → Crawl → Extract → Summarize → Validate → Store → Compose.</sub>
+
 Search, crawl, extract, and synthesize biosynthesis knowledge from the web into structured data and reports. The pipeline is LLM‑first for generation, with OA‑biased retrieval, optional headless crawling, and LLM‑backed RAG validation plus deterministic checks.
 
 Highlights
@@ -34,9 +38,11 @@ Checkpoints are written under `work/<run>/checkpoints/`:
 
 ### Workflow Diagram
 
-For a visual overview of the full pipeline and agent interactions, see the workflow diagram:
+For a visual overview of the full pipeline and agent interactions:
 
-- [Figure.pdf](Figure.pdf)
+- Inline image (above) — `Image_wf.png` (quick view)
+- Full PDF diagram: [Figure.pdf](Figure.pdf)
+- Example report (PDF): [SynBioKB_Agent.pdf](SynBioKB_Agent.pdf)
 
 Open it on GitHub to preview the PDF inline.
 
