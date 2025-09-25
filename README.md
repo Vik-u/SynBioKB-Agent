@@ -32,6 +32,14 @@ Highlights
 Checkpoints are written under `work/<run>/checkpoints/`:
 - `01_plan.json`, `02_urls.json`, `03_crawl_report.json`, `04_extract_report.json`, `05_summaries_quality.json`, `06_validation_report.json`, `00_index.json`.
 
+### Workflow Diagram
+
+For a visual overview of the full pipeline and agent interactions, see the workflow diagram:
+
+- [Figure.pdf](Figure.pdf)
+
+Open it on GitHub to preview the PDF inline.
+
 ### End‑to‑End Summary (At a Glance)
 
 - Input: your natural‑language query + API keys (`apis.yaml`) and an LLM provider (Ollama by default).
