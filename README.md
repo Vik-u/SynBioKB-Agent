@@ -93,6 +93,70 @@ Success criteria
 - LLM: local Ollama (default) or online provider (OpenAI‑compatible).
 - Python 3.11+ locally, or Docker/Compose for containerized runs.
 
+---
+
+## Tools & Packages (By Purpose)
+
+- LLMs
+  - Runtime: Ollama (local) — default provider
+  - Models: gpt-oss:20b (tested), others supported via Ollama; OpenAI‑compatible providers optional
+  - Client: `httpx` (custom clients in `src/biosyn_kb/llm/`)
+
+- Search & OA
+  - Web search: SerpAPI (Google) or Brave Search (`httpx` clients)
+  - OA enrichment: Unpaywall (`httpx`), DOI detection via regex
+  - URL/domain helpers: `tldextract`, `PyYAML` for config
+
+- Crawl
+  - HTTP crawler: `httpx.AsyncClient`, robots via `urllib.robotparser`
+  - Headless (JS sites): Playwright Chromium (optional)
+
+- Extract
+  - HTML cleaner: `trafilatura` → fallback to `beautifulsoup4`
+  - PDF: `pdfminer.six` (and `pdfplumber` if available)
+
+- Summarize & Schema
+  - Prompting: custom prompts under `src/biosyn_kb/summarize/`
+  - Schema/validation: `pydantic v2`
+  - Async orchestration: `asyncio`
+
+- Storage (KB)
+  - ORM: `SQLAlchemy 2`
+  - DB: SQLite (file under `artifacts/*.db`)
+
+- RAG & Embeddings
+  - Vector store: `chromadb` (PersistentClient)
+  - Embeddings: `sentence-transformers` (all‑MiniLM‑L6‑v2), downloads on first run
+
+- Web/API & Queue
+  - API/UI: `fastapi`, `uvicorn`, `Jinja2`
+  - Queue: SQLite‑backed lightweight worker (custom)
+
+- Orchestration
+  - CLI: `biosyn-kb` entrypoints
+  - Nextflow: workflows under `nextflow/` and `workflows/nextflow/`
+  - Docker/Compose: containerized app + Ollama
+
+- Testing & Docs
+  - Tests: `pytest`
+  - Docs/PDF helper: `reportlab` (for setup guide script)
+
+---
+
+## Tested Setup (Current Version)
+
+- Python: 3.11
+- OS: macOS (dev); Linux expected to work (Playwright adds platform deps)
+- LLMs: Ollama local with `gpt-oss:20b` (primary test model)
+- DB: SQLite files under `artifacts/`
+- RAG: ChromaDB + SentenceTransformers (all‑MiniLM‑L6‑v2)
+- Headless crawling: Playwright Chromium installed locally or via Dockerfile
+- Orchestration: CLI verified; web/queue endpoints live; Nextflow maps to same CLI stages
+
+Notes:
+- OpenAI‑compatible providers can be used by setting `--provider openai --base-url ... --api-key ...` where applicable.
+- The E2E validator uses an async LLM‑RAG path to confirm numeric metrics in retrieved contexts.
+
 ## Install (Local)
 
 ```
