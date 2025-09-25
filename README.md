@@ -1,6 +1,6 @@
 # Biosyn‑KB — Evidence‑Grounded Biosynthesis Knowledge Base
 
-![Workflow Overview](Image_wf_up.png)
+![Workflow Overview](image_wf_up.png)
 
 <sub>High‑level workflow: Strategist → Search/OA → Crawl → Extract → Summarize → Validate → Store → Compose.</sub>
 
