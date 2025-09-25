@@ -36,7 +36,7 @@ Checkpoints are written under `work/<run>/checkpoints/`:
 
 For a visual overview of the full pipeline and agent interactions, see the workflow diagram:
 
-- [Figure.pdf](Figure.pdf)
+- ![Figure.pdf](Figure.pdf)
 
 Open it on GitHub to preview the PDF inline.
 
